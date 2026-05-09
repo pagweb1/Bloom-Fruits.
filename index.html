@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom Fruits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#d63b70', // Color rosa/magenta del logo
+                        secondary: '#ff7a28', // Color naranja del logo
+                        light: '#fff3f6',
+                        soft: '#ffd9c8',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            }
+            .bg-pattern {
+                background-image: url('https://images.unsplash.com/photo-1565066223334-50969105524c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            .bg-overlay {
+                background-color: rgba(255, 245, 248, 0.85);
+            }
+            /* NUEVA CLASE PARA EL FONDO DE EMOJIS Y DEGRADADO */
+            .bg-fruit-gradient {
+                background: 
+                    linear-gradient(to right, rgba(214, 59, 112, 0.9), rgba(255, 122, 40, 0.9)),
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ctext y='35' x='10' font-size='25'%3E🍎%3C/text%3E%3Ctext y='85' x='60' font-size='25'%3E🍓%3C/text%3E%3Ctext y='35' x='60' font-size='25'%3E🍍%3C/text%3E%3Ctext y='85' x='10' font-size='25'%3E🥭%3C/text%3E%3C/svg%3E");
+                background-blend-mode: overlay;
+                background-repeat: repeat;
+            }
+        }
+    </style>
+</head>
+<body class="bg-pattern font-display min-h-screen">
+    <div class="bg-overlay min-h-screen">
+        <!-- Encabezado MODIFICADO con la nueva clase -->
+        <header class="bg-fruit-gradient text-white py-6 px-4 shadow-lg">
+            <div class="container mx-auto text-center">
+                <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-bold text-shadow">Bloom Fruits</h1>
+                <p class="text-lg md:text-xl">Postres en forma de fruta, elaborados con amor y sabor natural</p>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-4 py-8">
+            <!-- Selección de paquete -->
+            <section class="mb-10 bg-white/80 rounded-2xl p-6 shadow-md">
+                <h2 class="text-2xl md:text-3xl font-semibold text-primary mb-4">Elige tu paquete</h2>
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <label class="cursor-pointer px-6 py-3 rounded-full border-2 border-primary text-primary font-medium transition-all hover:bg-primary hover:text-white" id="pack4-label">
+                        <input type="radio" name="pack" value="4" class="hidden" checked> Paquete de 4 unidades
+                    </label>
+                    <label class="cursor-pointer px-6 py-3 rounded-full border-2 border-primary text-primary font-medium transition-all hover:bg-primary hover:text-white" id="pack6-label">
+                        <input type="radio" name="pack" value="6" class="hidden"> Paquete de 6 unidades
+                    </label>
+                </div>
+
+                <h3 class="text-xl font-medium text-secondary mb-3">Selecciona las frutas</h3>
+                <p class="text-gray-600 mb-4" id="cantidad-info">Debes elegir <span id="cantidad-necesaria">4</span> frutas para completar tu paquete</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Fresa" data-precio="50">
+                        <h4 class="font-semibold text-lg text-primary">Fresa</h4>
+                        <p class="text-gray-700">$50.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Frutos Rojos" data-precio="60">
+                        <h4 class="font-semibold text-lg text-primary">Frutos Rojos</h4>
+                        <p class="text-gray-700">$60.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Manzana" data-precio="50">
+                        <h4 class="font-semibold text-lg text-primary">Manzana</h4>
+                        <p class="text-gray-700">$50.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Mora" data-precio="50">
+                        <h4 class="font-semibold text-lg text-primary">Mora</h4>
+                        <p class="text-gray-700">$50.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Zarzamora" data-precio="50">
+                        <h4 class="font-semibold text-lg text-primary">Zarzamora</h4>
+                        <p class="text-gray-700">$50.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Frambuesa" data-precio="50">
+                        <h4 class="font-semibold text-lg text-primary">Frambuesa</h4>
+                        <p class="text-gray-700">$50.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Mango" data-precio="50">
+                        <h4 class="font-semibold text-lg text-primary">Mango</h4>
+                        <p class="text-gray-700">$50.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40 hover:shadow-md transition" data-fruta="Durazno con Fresa" data-precio="60">
+                        <h4 class="font-semibold text-lg text-primary">Durazno con Fresa</h4>
+                        <p class="text-gray-700">$60.00 MXN</p>
+                        <button class="agregar-fruta mt-2 w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/80 transition">Agregar</button>
+                    </div>
+                </div>
+
+                <!-- Toppings Extra -->
+                <h3 class="text-xl font-medium text-secondary mb-3">Toppings Extra</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md">
+                    <div class="border rounded-xl p-4 bg-soft/40" data-topping="Mermelada" data-precio="10">
+                        <h4 class="font-semibold text-lg text-primary">Mermelada</h4>
+                        <p class="text-gray-700">$10.00 MXN</p>
+                        <button class="agregar-topping mt-2 w-full bg-secondary text-white py-2 rounded-lg hover:bg-secondary/80 transition">Agregar</button>
+                    </div>
+                    <div class="border rounded-xl p-4 bg-soft/40" data-topping="Chocolate" data-precio="15">
+                        <h4 class="font-semibold text-lg text-primary">Chocolate</h4>
+                        <p class="text-gray-700">$15.00 MXN</p>
+                        <button class="agregar-topping mt-2 w-full bg-secondary text-white py-2 rounded-lg hover:bg-secondary/80 transition">Agregar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Carrito de Compras -->
+            <section class="bg-white/80 rounded-2xl p-6 shadow-md">
+                <h2 class="text-2xl md:text-3xl font-semibold text-primary mb-4">Tu Pedido 🛒</h2>
+                
+                <div id="carrito-vacio" class="text-center py-8 text-gray-500">
+                    Tu carrito está vacío. Agrega productos para armar tu pedido.
+                </div>
+
+                <div id="lista-carrito" class="space-y-3 mb-6 hidden"></div>
+
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-t pt-4">
+                    <p class="text-xl font-semibold text-gray-800">Total: $<span id="total-pedido">0.00</span> MXN</p>
+                    <div class="flex gap-3">
+                        <button id="vaciar-carrito" class="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition hidden">Vaciar Carrito</button>
+                        <a href="#" id="enviar-pedido" class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition hidden">Enviar Pedido por WhatsApp</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-gradient-to-r from-primary/90 to-secondary/90 text-white text-center py-6 mt-12">
+            <p>&copy; 2026 Bloom Fruits - Todos los derechos reservados</p>
+            <p class="mt-1">Teléfono: +52 921 439 1826</p>
+        </footer>
+    </div>
+
+    <script>
+        // Variables
+        const paquetes = document.querySelectorAll('input[name="pack"]');
+        const cantidadNecesariaSpan = document.getElementById('cantidad-necesaria');
+        const btnAgregarFruta = document.querySelectorAll('.agregar-fruta');
+        const btnAgregarTopping = document.querySelectorAll('.agregar-topping');
+        const listaCarrito = document.getElementById('lista-carrito');
+        const carritoVacio = document.getElementById('carrito-vacio');
+        const totalPedidoSpan = document.getElementById('total-pedido');
+        const btnVaciarCarrito = document.getElementById('vaciar-carrito');
+        const btnEnviarPedido = document.getElementById('enviar-pedido');
+
+        let cantidadPaquete = 4;
+        let carrito = [];
+
+        // Cambiar tamaño de paquete
+        paquetes.forEach(radio => {
+            radio.addEventListener('change', () => {
+                cantidadPaquete = parseInt(radio.value);
+                cantidadNecesariaSpan.textContent = cantidadPaquete;
+                actualizarCarrito();
+            });
+        });
+
+        // Agregar fruta
+        btnAgregarFruta.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tarjeta = btn.parentElement;
+                const nombre = tarjeta.dataset.fruta;
+                const precio = parseFloat(tarjeta.dataset.precio);
+
+                const frutasEnCarrito = carrito.filter(item => item.tipo === 'fruta').length;
+                if (frutasEnCarrito >= cantidadPaquete) {
+                    alert(`Ya tienes ${cantidadPaquete} frutas seleccionadas, que es lo que incluye tu paquete.`);
+                    return;
+                }
+
+                carrito.push({ tipo: 'fruta', nombre, precio });
+                actualizarCarrito();
+            });
+        });
+
+        // Agregar topping
+        btnAgregarTopping.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tarjeta = btn.parentElement;
+                const nombre = tarjeta.dataset.topping;
+                const precio = parseFloat(tarjeta.dataset.precio);
+
+                carrito.push({ tipo: 'topping', nombre, precio });
+                actualizarCarrito();
+            });
+        });
+
+        // Eliminar un elemento
+        function eliminarItem(indice) {
+            carrito.splice(indice, 1);
+            actualizarCarrito();
+        }
+
+        // Vaciar todo el carrito
+        btnVaciarCarrito.addEventListener('click', () => {
+            carrito = [];
+            actualizarCarrito();
+        });
+
+        // Actualizar vista del carrito
+        function actualizarCarrito() {
+            if (carrito.length === 0) {
+                carritoVacio.classList.remove('hidden');
+                listaCarrito.classList.add('hidden');
+                btnVaciarCarrito.classList.add('hidden');
+                btnEnviarPedido.classList.add('hidden');
+                totalPedidoSpan.textContent = '0.00';
+                return;
+            }
+
+            carritoVacio.classList.add('hidden');
+            listaCarrito.classList.remove('hidden');
+            btnVaciarCarrito.classList.remove('hidden');
+            btnEnviarPedido.classList.remove('hidden');
+
+            listaCarrito.innerHTML = '';
+            let total = 0;
+
+            carrito.forEach((item, indice) => {
+                total += item.precio;
+                const elemento = document.createElement('div');
+                elemento.className = 'flex justify-between items-center p-3 bg-white rounded-lg shadow-sm';
+                elemento.innerHTML = `
+                    <div>
+                        <span class="font-medium">${item.nombre}</span>
+                        <span class="text-sm text-gray-600 ml-2">(${item.tipo === 'fruta' ? 'Postre' : 'Topping'})</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-700">$${item.precio.toFixed(2)}</span>
+                        <button onclick="eliminarItem(${indice})" class="text-red-500 hover:text-red-700 font-bold">×</button>
+                    </div>
+                `;
+                listaCarrito.appendChild(elemento);
+            });
+
+            totalPedidoSpan.textContent = total.toFixed(2);
+            actualizarEnlaceWhatsApp();
+        }
+
+        // Generar enlace para WhatsApp
+        function actualizarEnlaceWhatsApp() {
+            const numero = '529214391826';
+            let mensaje = `¡Hola! Quiero realizar mi pedido a Bloom Fruits%0A%0A`;
+            mensaje += `📦 Paquete de ${cantidadPaquete} unidades%0A%0A`;
+            mensaje += `🍇 Productos:%0A`;
+
+            carrito.forEach(item => {
+                mensaje += `- ${item.nombre}: $${item.precio.toFixed(2)}%0A`;
+            });
+
+            mensaje += `%0A💰 Total a pagar: $${parseFloat(totalPedidoSpan.textContent).toFixed(2)} MXN%0A%0A`;
+            mensaje += `¡Gracias por tu compra!`;
+
+            btnEnviarPedido.href = `https://wa.me/${numero}?text=${mensaje}`;
+        }
+    </script>
+</body>
+</html>
